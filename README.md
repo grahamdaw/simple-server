@@ -70,3 +70,9 @@ If you wish to rebuild the container via Docker Compose:
 ```bash
 docker compose build simple-server
 ```
+
+# Publishing
+
+Images are automatically built and published to [ghcr.io](https://github.com/grahamdaw/simple-server/pkgs/container/simple-server) from every commit on branch `main`.
+
+To pull the latest image from the repository, use `docker pull ghcr.io/grahamdaw/simple-server:main`.
