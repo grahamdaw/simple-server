@@ -2,6 +2,10 @@
   "name": "simple-server",
   "version": "1.0.0",
   "description": "A simple server that returns a webpage.",
+  "engines": {
+    "node": ">=18",
+    "npm": ">=9"
+  },
   "scripts": {
     "dev": "ts-node src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,7 +16,7 @@
     "type": "git",
     "url": "git+https://github.com/grahamdaw/simple-server.git"
   },
-  "author": "",
+  "author": "grahamdaw",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/grahamdaw/simple-server/issues"
