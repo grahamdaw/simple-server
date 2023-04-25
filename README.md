@@ -28,7 +28,7 @@ docker run --name simple-server -e MESSAGE='Hello other world!' -e PORT=3000 -p 
 
 The required node and npm versions are defined in the `package.json`.
 
-You can use [Node Version Manager](https://github.com/nvm-sh/nvm), there  to install the correct version of node specified in `.nvmrc` file in this repository.
+You can use [Node Version Manager](https://github.com/nvm-sh/nvm) to install the correct version of node specified in `.nvmrc` file in this repository.
 
 ```bash
 nvm use
@@ -84,7 +84,7 @@ docker run --name simple-server --env-file .env -p 8080:8080 -d simple-server
 To build and run the server via Docker Compose:
 
 ```bash
-docker compose up simple-servergs -d
+docker compose up simple-server -d
 ```
 
 If you wish to rebuild the container via Docker Compose:
