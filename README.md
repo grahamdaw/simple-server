@@ -11,7 +11,7 @@ It is a Koa based Node JS API that returns some JSON when sent `GET` requests. F
 The response message can be customized so that different servers return different content.
 
 # Usage
-You probably want to use the published image, that can be used with Docker, e.g.
+You probably want to use the published image which can be used with Docker, e.g.
 ```
 docker run --name simple-server -p 8080:8080 -d ghcr.io/grahamdaw/simple-server:main
 ```
