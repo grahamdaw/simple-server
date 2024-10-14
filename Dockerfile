@@ -1,4 +1,4 @@
-FROM node:18
+FROM node:22
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -18,6 +18,8 @@ COPY . .
 
 # Build the app (It's worth mentioning again, that this build step should not really be run in the production container, but for our testing case it is fine)
 RUN npm run build
+
+EXPOSE 8080
 
 # Run the app
 CMD [ "node", "dist/server.js"]

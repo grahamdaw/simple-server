@@ -12,7 +12,7 @@ const MESSAGE = process.env.MESSAGE || "Hello default world!";
 
 // Paths
 router.get("/", async (ctx, next) => {
-  ctx.body = { msg: MESSAGE}
+  ctx.body = { msg: MESSAGE };
   await next();
 });
 
@@ -25,5 +25,5 @@ app.use(router.routes()).use(router.allowedMethods());
 
 // Server
 app.listen(PORT, () => {
-  console.log(`Server now listening on port ${PORT}`)
-})
+  console.log(`Server now listening on port ${PORT}`);
+});
