@@ -1,26 +1,30 @@
 # simple-server
+
 A image of a simple endpoint that can be deployed to test routing. I built this to quickly deploy and test geo-routing configurations to make sure the right users reach the right services.
 
 It is a Koa based Node JS API that returns some JSON when sent `GET` requests. For example, a `GET` request to `/` will return:
+
 ```json
 {
-    "msg": "Hello world!"
+  "msg": "Hello world!"
 }
 ```
 
 The response message can be customized so that different servers return different content.
 
 # Usage
+
 You probably want to use the published image which can be used with Docker, e.g.
+
 ```
 docker run --name simple-server -p 8080:8080 -d ghcr.io/grahamdaw/simple-server:main
 ```
 
 Optionally you can specify a custom message (via the `MESSAGE` environment variable) or have the server listen on a different port (via the `PORT` environment variable), e.g.
+
 ```bash
 docker run --name simple-server -e MESSAGE='Hello other world!' -e PORT=3000 -p 3000:3000 -d ghcr.io/grahamdaw/simple-server:main
 ```
-
 
 # Development
 
@@ -36,14 +40,13 @@ nvm use
 
 ## Environment
 
-The supported environment variables can be defined in a `.env` file. 
+The supported environment variables can be defined in a `.env` file.
 
 You can copy and configure the template [`.env.example`](.env.example) to `.env` to get started.
 
-
 ## direnv
 
-You can install [direnv](https://github.com/direnv/direnv) to load and unload environment variables depending on the current directory. This project contains a [`.envrc`](.envrc) file to automatically set the correct node and environment. 
+You can install [direnv](https://github.com/direnv/direnv) to load and unload environment variables depending on the current directory. This project contains a [`.envrc`](.envrc) file to automatically set the correct node and environment.
 
 ```bash
 direnv allow
@@ -62,7 +65,7 @@ npm run dev
 
 ## Local Node
 
-The following commands can run the server in the local node installation. Note that this requires the `.env` environment varibles to be set in the shell beforehand. 
+The following commands can run the server in the local node installation. Note that this requires the `.env` environment varibles to be set in the shell beforehand.
 
 ```bash
 npm ci --omit=dev
@@ -88,6 +91,7 @@ docker compose up simple-server -d
 ```
 
 If you wish to rebuild the container via Docker Compose:
+
 ```bash
 docker compose build simple-server
 ```
@@ -97,6 +101,7 @@ docker compose build simple-server
 Images are automatically built and published to [ghcr.io](https://github.com/grahamdaw/simple-server/pkgs/container/simple-server) from every commit on branch `main`.
 
 To pull the latest image from the repository:
+
 ```
 docker pull ghcr.io/grahamdaw/simple-server:main
 ```
