@@ -1,23 +1,36 @@
-FROM node:22
+FROM node:22-alpine AS base
 
-# Create app directory
-WORKDIR /usr/src/app
+# Install dependencies only when needed
+FROM base AS deps
+WORKDIR /app
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json ./
+# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
+RUN apk add --no-cache libc6-compat
 
-# Install dependencies - Note this includes devDependencies as we compile the app in future steps.
-# This is NOT the production ready way to do this, the app should be built and then copied to the production container.
-# However, as this is a simple test app lets make life easier & just build & run the app in the same container.
-RUN npm ci
+# Install dependencies
+COPY package.json package-lock.json* ./
+RUN npm ci --verbose
 
-# Copy the source code to the container
+# Rebuild the source code only when needed
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Build the app (It's worth mentioning again, that this build step should not really be run in the production container, but for our testing case it is fine)
+# Build the app
 RUN npm run build
+
+# Production image, copy all the files and run next
+FROM base AS runner
+WORKDIR /app
+
+COPY --from=builder  --chown=node:node /app/node_modules ./node_modules
+COPY --from=builder --chown=node:node /app/dist ./dist
+
+# Remove the dev dependencies
+RUN npm prune --production
+
+USER node
 
 EXPOSE 8080
 
